@@ -46,7 +46,7 @@ ANOVA_Table <- rbind(
 rownames(ANOVA_Table) <- c("Model", "Error", "Total")
 colnames(ANOVA_Table) <- c("SS", "df", "MS", "F", "p-value")
 
-# ANOVA_Table
+print(ANOVA_Table)
 
 # 1 e) see pdf
 # 1 f) see pdf

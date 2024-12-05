@@ -1,3 +1,7 @@
+#### Name: Luca Stefanescu
+#### Student Number: 219004852
+#### Math 3330 Assignment 1
+
 # Load dataset
 df <- read.csv("./spotify.csv")
 View(df)
@@ -5,20 +9,17 @@ View(df)
 # Question 1a
 model = lm(popularity ~ ., data = df)
 
-num_of_breaks = sqrt(length(model$residuals))
-
 par(mfrow = c(1, 3))
 
 windows()
 car::qqPlot(model$residuals, pch = 22)
 
 windows()
-hist(model$residuals, breaks = num_of_breaks)
+hist(model$residuals)
 
 # Question 1b
 n <- length(model$residuals)
 s <- summary(model)
-
 regular_residuals <- model$residuals
 
 hii <- hatvalues(model)
@@ -33,10 +34,9 @@ plot(model$fitted.values, Rstudent_res, bg = 1)
 abline(h = 0)
 
 # Question 1c
-num_of_breaks_popularity <- sqrt(length(df$popularity))
 
 windows()
-hist(df$popularity, breaks = num_of_breaks_popularity)
+hist(df$popularity)
 
 # Question 1d
 par(mfrow = c(1, 1))
@@ -98,7 +98,8 @@ regular_residuals_positive_updated <- model_positive_updated$residuals
 
 hii_positive_updated <- hatvalues(model_positive_updated)
 
-MSE_i_positive_updated = ((n_positive_updated - 2) * (s_positive_updated$sigma)^2 - regular_residuals_positive_updated^2 / (1 - hii_positive_updated)) / (n_positive_updated - 3)
+MSE_i_positive_updated = ((n_positive_updated - 2) * (s_positive_updated$sigma)^2 - 
+regular_residuals_positive_updated^2 / (1 - hii_positive_updated)) / (n_positive_updated - 3)
 
 Rstudent_res_positive_updated <- model_positive_updated$residuals / sqrt(MSE_i_positive_updated)
 student_res <- rstudent(model_positive_updated)
